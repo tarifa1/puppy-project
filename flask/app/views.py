@@ -1,3 +1,4 @@
+from flask import request
 from app import app 
 import os
 
@@ -23,10 +24,24 @@ def index():
 @app.route("/users/<username>", )
 def display_user(username):
     '''
-    https://hackersandslackers.com/flask-routes/
+    Demos a way to handle args from the client
     '''
 
     return f"The user is: {username}"
+
+
+@app.route("/puppies", methods=['GET', 'POST'] )
+def puppies():
+    '''
+    This method demos the more sound way to handle args in requests
+    Good to read : https://hackersandslackers.com/flask-routes/
+    '''
+    
+    if request.method == 'GET':
+        return f"There are no registered puppies"
+    elif request.method == 'POST':
+        puppy_name = request.form.get('puppy_name')
+        return f"My puppies is: {puppy_name}"
 
 
 
