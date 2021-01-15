@@ -9,8 +9,11 @@ def index():
     
     Try running the app without the variable
     and then set this variable and see how it changes:
-    
-        export APP_NAME=YOU_CHOOSE_A_NAME
+        
+        *BROWSER INPUT OVERRIDES THE FOLLOWING
+        export APP_NAME=PuppyProject
+        export username=Quazi
+        export puppy_name=Onyx
     
     '''
     app_name = os.getenv("APP_NAME")
@@ -28,6 +31,17 @@ def display_user(username):
 
     return f"The user is: {username}"
 
+@app.route("/puppies", methods=['GET', 'POST'] )
+def puppies():
+    '''
+    This method demos the more sound way to handle args in requests
+    Good to read : https://hackersandslackers.com/flask-routes/
+    '''
+    
+    if request.method == 'GET':
+        return f"There are no registered puppies"
+    
+    elif request.method == 'POST':
+        puppy_name = request.headers.get('puppy_name')
 
-
-
+        return f"My puppies is: {puppy_name}"
