@@ -32,6 +32,7 @@ def display_user(username):
 
     return f"The user is: {username}"
 
+
 @app.route("/puppies", methods=['GET', 'POST'] )
 def puppies():
     '''

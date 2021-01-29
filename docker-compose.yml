@@ -17,3 +17,19 @@ services:
     restart: always
     ports:
       - "80:80"
+
+  mysql:
+    platform: linux/x86_64
+    image: mysql:8.0
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: my_secret_password
+      MYSQL_DATABASE: app_db
+      MYSQL_USER: db_user
+      MYSQL_PASSWORD: db_user_pass
+    ports:
+      - "6033:3306"
+    volumes:
+      - /Users/tarifahmed/persistentdb:/var/lib/mysql
+
+      
