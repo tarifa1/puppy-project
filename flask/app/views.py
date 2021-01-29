@@ -1,4 +1,5 @@
 from app import app 
+from flask import request, jsonify, redirect, url_for
 import os
 
 @app.route("/")
@@ -42,6 +43,28 @@ def puppies():
         return f"There are no registered puppies"
     
     elif request.method == 'POST':
-        puppy_name = request.headers.get('puppy_name')
+        # https://stackoverflow.com/questions/10434599/get-the-data-received-in-a-flask-request
 
-        return f"My puppies is: {puppy_name}"
+        '''
+        When receiving post with JSON data 
+        in the body, you can use this: 
+        
+        data = request.get_json()
+        '''
+        
+        # For ease of use, our app will receive posts with form data
+        data = request.form
+        print(data)
+        puppy = data.get('puppy_name')
+
+        return f"My puppy is: {puppy}"
+
+
+@app.route('/login',methods = ['POST', 'GET'])
+def login():
+    # https://pythonbasics.org/flask-http-methods/
+   if request.method == 'POST':
+      user = request.form['username']
+      return redirect(url_for('/users',username=user))
+   else:
+      return redirect(url_for('/'))
